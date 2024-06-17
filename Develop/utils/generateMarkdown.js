@@ -1,3 +1,6 @@
+const marked = require('marked');
+
+
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
@@ -41,6 +44,15 @@ function generateMarkdown(data) {
 
 ${renderLicenseBadge(data.license)}
 
+## Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contribution](#contribution)
+- [Tests](#tests)
+- [License](#license)
+- [Questions](#questions)
+
 ## Description
 ${data.description}
 
@@ -50,11 +62,25 @@ ${data.installation}
 ## Usage
 ${data.usage}
 
+## Contribution
+${data.contribution}
+
+## Tests
+${data.tests}
+
 ${renderLicenseSection(data.license)}
+
+
 
 ## Questions
 For questions or concerns about this project, please contact [${data.username}](https://github.com/${data.username}) via email at ${data.email}.
 `;
 }
 
-module.exports = generateMarkdown;
+
+
+function generateHtml(markdown) {
+  return marked.parse(markdown); 
+}
+
+module.exports = { generateMarkdown, generateHtml };
